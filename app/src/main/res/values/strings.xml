@@ -1,0 +1,29 @@
+<resources>
+    <!--Main-->
+    <string name="app_name">Exam</string>
+    <string name="button1">浏览题库</string>
+    <string name="button2">考试模拟</string>
+    <string name="button3">错题浏览</string>
+    <!--Button1-->
+    <string name="question">题目</string>
+    <string name="option1">选项1</string>
+    <string name="option2">选项2</string>
+    <string name="option3">选项3</string>
+    <string name="option4">选项4</string>
+    <string name="answer">答案</string>
+    <string name="explain">解析</string>
+    <string name="pic">图源</string>
+    <string name="type">类型</string>
+    <string name="chapter">章节</string>
+    <string name="up">上一题</string>
+    <string name="down">下一题</string>
+    <!--Button2-->
+    <string name="time">剩余时间</string>
+    <string name="jinDu">答题进度</string>
+    <string name="right_wrong">对错状况</string>
+    <string name="right">对</string>
+    <string name="error">错</string>
+    <string name="q_type">题目类型</string>
+    <!--Button3-->
+
+</resources>
