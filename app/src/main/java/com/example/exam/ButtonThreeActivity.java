@@ -56,8 +56,7 @@ public class ButtonThreeActivity extends AppCompatActivity implements View.OnCli
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //如果有标记，查找上次标记题目位置，否则查询第一个（记录上次题目位置）
         if (preferences.getInt("id_error", 0) != 0) {
-            int id = preferences.getInt("id_error", 0);
-            ErrorExam errorExam = LitePal.find(ErrorExam.class, id);
+            ErrorExam errorExam = LitePal.findFirst(ErrorExam.class);
             showResultInfo(errorExam);
         } else {
 //            ErrorExam errorExam = LitePal.findFirst(ErrorExam.class);

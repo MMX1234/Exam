@@ -25,6 +25,9 @@ public class ButtonTwoActivity extends AppCompatActivity {
     private TextView testQTypeView;
     private TextView testQView;
     private ImageView testPicView;
+
+    private View  internalView;
+
     //单选
     private RadioGroup rbGroup;
     private RadioButton option1RB;
@@ -47,6 +50,8 @@ public class ButtonTwoActivity extends AppCompatActivity {
     //对错总数
     private int right_sum = 0;
     private int error_sum = 0;
+
+    private int questionType=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +83,14 @@ public class ButtonTwoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ButtonTwoActivity.this);
                 typeLayout = findViewById(R.id.typeLayout);
-                if (preferences.getString("q_type", null).equals("单选")) {
-                    view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_rb, typeLayout, false);
-                    rbGroup = view.findViewById(R.id.rbGroup);
+                if (questionType==1) {
+//                    view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_rb, typeLayout, false);
+                    rbGroup = internalView.findViewById(R.id.rbGroup);
 //                    option1RB = view.findViewById(R.id.option1RB);
 //                    option2RB = view.findViewById(R.id.option2RB);
 //                    option3RB = view.findViewById(R.id.option3RB);
 //                    option4RB = view.findViewById(R.id.option4RB);
-                    typeLayout.addView(view);
+                    //typeLayout.addView(view);
                     if (rbGroup.getCheckedRadioButtonId() != -1) {
                         RadioButton mRB = findViewById(rbGroup.getCheckedRadioButtonId());
                         if (exam.getAnswer().contentEquals(mRB.getText().subSequence(0, 1))) {
@@ -98,12 +103,12 @@ public class ButtonTwoActivity extends AppCompatActivity {
                         error_sum++;
                         addErrorExam(exam.getId());
                     }
-                } else {
-                    view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_tfb, typeLayout, false);
-                    tfbGroup = view.findViewById(R.id.tfbGroup);
+                } else if(questionType==2) {
+                    //view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_tfb, typeLayout, false);
+                    tfbGroup = internalView.findViewById(R.id.tfbGroup);
 //                    trueButton = view.findViewById(R.id.trueButton);
 //                    falseButton = view.findViewById(R.id.falseButton);
-                    typeLayout.addView(view);
+                    //typeLayout.addView(view);
                     if (tfbGroup.getCheckedRadioButtonId() != -1) {
                         RadioButton mTFB = findViewById(tfbGroup.getCheckedRadioButtonId());
                         if (exam.getAnswer().contentEquals(mTFB.getText())) {
@@ -143,13 +148,14 @@ public class ButtonTwoActivity extends AppCompatActivity {
         typeLayout.removeAllViews();
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(ButtonTwoActivity.this).edit();
         if (exam.getAnswer().equals("A") || exam.getAnswer().equals("B") || exam.getAnswer().equals("C") || exam.getAnswer().equals("D")) {
+            questionType = 1;
             editor.putString("q_type", "单选");
             editor.apply();
-            View view = LayoutInflater.from(this).inflate(R.layout.layout_rb, typeLayout, false);
-            option1RB = view.findViewById(R.id.option1RB);
-            option2RB = view.findViewById(R.id.option2RB);
-            option3RB = view.findViewById(R.id.option3RB);
-            option4RB = view.findViewById(R.id.option4RB);
+            internalView = LayoutInflater.from(this).inflate(R.layout.layout_rb, typeLayout, false);
+            option1RB = internalView.findViewById(R.id.option1RB);
+            option2RB = internalView.findViewById(R.id.option2RB);
+            option3RB = internalView.findViewById(R.id.option3RB);
+            option4RB = internalView.findViewById(R.id.option4RB);
 
             testQTypeView.setText("单选题");
             testQView.setText("问题" + exam.getId() + "：" + exam.getQuestion());
@@ -158,16 +164,17 @@ public class ButtonTwoActivity extends AppCompatActivity {
             option3RB.setText(exam.getOption3());
             option4RB.setText(exam.getOption4());
 
-            typeLayout.addView(view);
+            typeLayout.addView(internalView);
         } else if (exam.getAnswer().equals("对") || exam.getAnswer().equals("错")) {
+            questionType = 2;
             editor.putString("q_type", "判断");
             editor.apply();
-            View view = LayoutInflater.from(this).inflate(R.layout.layout_tfb, typeLayout, false);
+            internalView = LayoutInflater.from(this).inflate(R.layout.layout_tfb, typeLayout, false);
 
             testQTypeView.setText("判断题");
             testQView.setText("问题" + exam.getId() + "：" + exam.getQuestion());
 
-            typeLayout.addView(view);
+            typeLayout.addView(internalView);
         }
         main_total_tx.setText(String.valueOf(exam.getId()) + "/100");
     }
