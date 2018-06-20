@@ -26,7 +26,7 @@ public class ButtonTwoActivity extends AppCompatActivity {
     private TextView testQView;
     private ImageView testPicView;
 
-    private View  internalView;
+    private View internalView;
 
     //单选
     private RadioGroup rbGroup;
@@ -51,7 +51,7 @@ public class ButtonTwoActivity extends AppCompatActivity {
     private int right_sum = 0;
     private int error_sum = 0;
 
-    private int questionType=0;
+    private int questionType = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +81,9 @@ public class ButtonTwoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ButtonTwoActivity.this);
                 typeLayout = findViewById(R.id.typeLayout);
-                if (questionType==1) {
-//                    view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_rb, typeLayout, false);
+                if (questionType == 1) {
                     rbGroup = internalView.findViewById(R.id.rbGroup);
-//                    option1RB = view.findViewById(R.id.option1RB);
-//                    option2RB = view.findViewById(R.id.option2RB);
-//                    option3RB = view.findViewById(R.id.option3RB);
-//                    option4RB = view.findViewById(R.id.option4RB);
-                    //typeLayout.addView(view);
                     if (rbGroup.getCheckedRadioButtonId() != -1) {
                         RadioButton mRB = findViewById(rbGroup.getCheckedRadioButtonId());
                         if (exam.getAnswer().contentEquals(mRB.getText().subSequence(0, 1))) {
@@ -103,12 +96,8 @@ public class ButtonTwoActivity extends AppCompatActivity {
                         error_sum++;
                         addErrorExam(exam.getId());
                     }
-                } else if(questionType==2) {
-                    //view = LayoutInflater.from(ButtonTwoActivity.this).inflate(R.layout.layout_tfb, typeLayout, false);
+                } else if (questionType == 2) {
                     tfbGroup = internalView.findViewById(R.id.tfbGroup);
-//                    trueButton = view.findViewById(R.id.trueButton);
-//                    falseButton = view.findViewById(R.id.falseButton);
-                    //typeLayout.addView(view);
                     if (tfbGroup.getCheckedRadioButtonId() != -1) {
                         RadioButton mTFB = findViewById(tfbGroup.getCheckedRadioButtonId());
                         if (exam.getAnswer().contentEquals(mTFB.getText())) {

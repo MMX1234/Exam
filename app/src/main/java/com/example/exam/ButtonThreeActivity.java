@@ -59,8 +59,6 @@ public class ButtonThreeActivity extends AppCompatActivity implements View.OnCli
             ErrorExam errorExam = LitePal.findFirst(ErrorExam.class);
             showResultInfo(errorExam);
         } else {
-//            ErrorExam errorExam = LitePal.findFirst(ErrorExam.class);
-//            showResultInfo(errorExam);
             Toast.makeText(this, "没有错题！", Toast.LENGTH_SHORT).show();
             e_upButton.setEnabled(false);
             e_downButton.setEnabled(false);
